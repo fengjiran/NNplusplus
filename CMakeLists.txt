@@ -3,4 +3,8 @@ project(NNplusplus)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(NNplusplus main.cpp matrix.hpp matrix_exceptions.hpp)
+add_executable(NNplusplus
+        main.cpp
+        matrix.hpp
+        matrix_exceptions.hpp
+        )
