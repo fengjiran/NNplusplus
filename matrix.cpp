@@ -129,6 +129,10 @@ Matrix operator-(Matrix lhs, double scalar) {
     return lhs -= scalar;
 }
 
+Matrix operator-(double scalar, Matrix rhs) {
+    return -rhs += scalar;
+}
+
 Matrix &Matrix::operator*=(const Matrix &rhs) {
     if (m_size_ == rhs.m_size_ && n_size_ == rhs.n_size_) {
         for (size_t i = 0; i < m_size_ * n_size_; i++)
@@ -160,4 +164,103 @@ Matrix operator*(Matrix lhs, double scalar) {
 Matrix operator*(double scalar, Matrix rhs) {
     return rhs *= scalar;
 }
+
+Matrix &Matrix::operator/=(const Matrix &rhs) {
+    if (m_size_ == rhs.m_size_ && n_size_ == rhs.n_size_) {
+        for (size_t i = 0; i < m_size_ * n_size_; i++)
+            matrix_[i] /= rhs.matrix_[i];
+        return *this;
+    } else
+        throw MatrixDimensionsMismatch();
+}
+
+Matrix &Matrix::operator/=(double scalar) {
+    for (size_t i = 0; i < m_size_ * n_size_; i++)
+        matrix_[i] /= scalar;
+    return *this;
+}
+
+Matrix operator/(Matrix lhs, const Matrix &rhs) {
+    if (lhs.m_size_ == rhs.m_size_ && lhs.n_size_ == rhs.n_size_)
+        return lhs /= rhs;
+    else
+        throw MatrixDimensionsMismatch();
+}
+
+Matrix operator/(Matrix lhs, double scalar) {
+    return lhs /= scalar;
+}
+
+Matrix operator/(double scalar, Matrix rhs) {
+    return rhs /= scalar;
+}
+
+Matrix Matrix::dot(const Matrix &rhs) const {
+    if (n_size_ == rhs.m_size_) {
+        Matrix rhs_T{rhs.T()};
+        Matrix dproduct(m_size_, rhs.n_size_);
+
+        for (size_t i = 0; i < m_size_; i++)
+            for (size_t j = 0; j < rhs_T.m_size_; j++) {
+                double dot = 0;
+                for (size_t k = 0; k < n_size_; k++)
+                    dot += row_ptrs_[i][k] * rhs_T.row_ptrs_[j][k];
+                dproduct.row_ptrs_[i][j] = dot;
+            }
+        return dproduct;
+
+    } else
+        throw MatrixDimensionsMismatch();
+
+}
+
+Matrix Matrix::T() const {
+    Matrix T(n_size_, m_size_);
+    for (size_t i = 0; i < m_size_; i++)
+        for (size_t j = 0; j < n_size_; j++)
+            T.row_ptrs_[j][i] = row_ptrs_[i][j];
+
+    return T;
+}
+
+size_t Matrix::getNumberOfRows() const {
+    return m_size_;
+}
+
+size_t Matrix::getNumberOfCols() const {
+    return n_size_;
+}
+
+std::pair<size_t, size_t> Matrix::getMaxVal() const {
+    long int maxI = -1;
+    long int maxJ = -1;
+    double maxVal = -INFINITY;
+
+    for (size_t i = 0; i < m_size_; i++)
+        for (size_t j = 0; j < n_size_; j++)
+            if (row_ptrs_[i][j] >= maxVal) {
+                maxVal = row_ptrs_[i][j];
+                maxI = i;
+                maxJ = j;
+            }
+
+    return std::pair<size_t, size_t>(maxI, maxJ);
+}
+
+void Matrix::printMtrx() const {
+    for (size_t i = 0; i < m_size_; i++) {
+        for (size_t j = 0; j < n_size_; j++)
+            std::cout << row_ptrs_[i][j] << "\t\t";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+Matrix Matrix::operator-() const {
+    Matrix neg{*this};
+    for (size_t i = 0; i < m_size_ * n_size_; i++)
+        neg.matrix_[i] = -neg.matrix_[i];
+    return neg;
+}
+
 
