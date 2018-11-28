@@ -56,3 +56,8 @@ Matrix &Matrix::operator=(Matrix &&rhs) {
 
     return *this;
 }
+
+Matrix::~Matrix() {
+    delete[] matrix_;
+    delete[] row_ptrs_;
+}
