@@ -114,15 +114,26 @@ public:
      * Other functions
      **********************************************************/
 
+    // A simple matrix algebra dot product operation.
+    // Return a 0 by 0 matrix if the dimensions do not match.
+    // See operator*(Matrix &rhs) for term by term multiplication.
     Matrix dot(const Matrix &rhs) const;
 
+    // Get number of rows (M)xN
     size_t getNumberOfRows() const;
 
+    // Get number of columns Mx(N)
     size_t getNumberOfCols() const;
 
+    // Transpose the matrix MxN -> NxM
     Matrix T() const;
 
+    // Get the coordinates of the largest value in the matrix.
+    // Will return the coordinates of the earliest larger val.
+    std::pair<size_t, size_t> getMaxVal() const;
 
+    // print the matrix to std::cout
+    void printMtrx() const;
 
 };
 
