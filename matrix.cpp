@@ -34,3 +34,25 @@ Matrix &Matrix::operator=(const Matrix &rhs) {
     }
     return *this;
 }
+
+Matrix::Matrix(Matrix &&rhs)
+        : m_size_(rhs.m_size_),
+          n_size_(rhs.n_size_),
+          matrix_(rhs.matrix_),
+          row_ptrs_(rhs.row_ptrs_) {
+
+    rhs.m_size_ = 0;
+    rhs.n_size_ = 0;
+    rhs.matrix_ = nullptr;
+    rhs.row_ptrs_ = nullptr;
+
+}
+
+Matrix &Matrix::operator=(Matrix &&rhs) {
+    std::swap(m_size_, rhs.m_size_);
+    std::swap(n_size_, rhs.n_size_);
+    std::swap(matrix_, rhs.matrix_);
+    std::swap(row_ptrs_, rhs.row_ptrs_);
+
+    return *this;
+}
