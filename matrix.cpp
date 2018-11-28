@@ -21,6 +21,9 @@ Matrix::Matrix(const Matrix &rhs)
 
     for (size_t i = 0; i < m_size_ * n_size_; i++)
         matrix_[i] = rhs.matrix_[i];
+
+    for (size_t i = 0; i < m_size_; i++)
+        row_ptrs_[i] = &matrix_[i * n_size_];
 }
 
 Matrix Matrix::dot(const Matrix &rhs) const {}
