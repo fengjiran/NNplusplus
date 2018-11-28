@@ -7,4 +7,4 @@ add_executable(NNplusplus
         main.cpp
         matrix.hpp
         matrix_exceptions.hpp
-        matrix.cpp neural_network.hpp)
+        matrix.cpp neural_network.hpp neural_netwok.cpp)
