@@ -95,6 +95,33 @@ public:
     friend Matrix operator*(double scalar, Matrix rhs);
 
 
+    // division
+    Matrix &operator/=(const Matrix &rhs);
+
+    Matrix &operator/=(double scalar);
+
+    friend Matrix operator/(Matrix lhs, const Matrix &rhs);
+
+    friend Matrix operator/(Matrix lhs, double scalar);
+
+    friend Matrix operator/(double scalar, Matrix rhs);
+
+    // unary minus operator for matrix term by term negative
+    Matrix operator-() const;
+
+
+    /**********************************************************
+     * Other functions
+     **********************************************************/
+
+    Matrix dot(const Matrix &rhs) const;
+
+    size_t getNumberOfRows() const;
+
+    size_t getNumberOfCols() const;
+
+    Matrix T() const;
+
 
 
 };
