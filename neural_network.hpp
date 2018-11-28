@@ -40,6 +40,34 @@ private:
     // Used to name neural nets when saved.
     std::string getCurrTime() const;
 
+public:
+    NeuralNet(size_t input_nodes = 1, size_t hidden_nodes = 1,
+              size_t output_nodes = 1, size_t hidden_layers = 1,
+              double lr = 0.1);
+
+    // A ctor that loads a saved neural net.
+    // Expecting a filename with file type *.nn
+    // Initializes a new net wit the weights saved
+    // in the file.
+    explicit NeuralNet(const std::string &filename);
+
+    // Feed forward the input Matrix and return the
+    // net's prediction in a Matrix.
+    Matrix queryNet(const Matrix &input_list);
+
+    // A single feed forward and back propagation with weight updates.
+    void trainingCycle(const Matrix &inputList, const Matrix &targetOutput);
+
+    // A method to save the current state of the net.
+    // Files are saved as *.nn.
+    // If no file name is supplied, file will be saved
+    // with the time and date the net was saved.
+    void saveNetwork(const std::string &name = "") const;
+
+    // Load an existing net into the current object.
+    void loadNetwork(const std::string &name);
+
+
 };
 
 #endif //NNPLUSPLUS_NEURAL_NETWORK_HPP
