@@ -42,7 +42,7 @@ public:
     Matrix(Matrix &&rhs);
 
     // move assignment operator
-    Matrix&operator=(Matrix&& rhs);
+    Matrix &operator=(Matrix &&rhs);
 
     // dealloc matrix_ (ctor)
     ~Matrix();
@@ -52,8 +52,51 @@ public:
      **********************************************************/
 
     // a substitute to operator[] for a 2D array
-    double&operator()(size_t row, size_t col);
-    const double&operator()(size_t row, size_t col) const;
+    double &operator()(size_t row, size_t col);
+
+    const double &operator()(size_t row, size_t col) const;
+
+    // addition
+    Matrix &operator+=(const Matrix &rhs);
+
+    Matrix &operator+=(double scalar);
+
+    // term by term addition operator for two matricies
+    friend Matrix operator+(Matrix lhs, const Matrix &rhs);
+
+    // term by term addition operator for matrix and scalar
+    friend Matrix operator+(Matrix lhs, double scalar);
+
+    // allowing for the scalar addition commutative property
+    friend Matrix operator+(double scalar, Matrix rhs);
+
+
+    // subtraction
+    Matrix &operator-=(const Matrix &rhs);
+
+    Matrix &operator-=(double scalar);
+
+    friend Matrix operator-(Matrix lhs, const Matrix &rhs);
+
+    friend Matrix operator-(Matrix lhs, double scalar);
+
+    friend Matrix operator-(double scalar, Matrix rhs);
+
+
+    // multiplication
+    Matrix &operator*=(const Matrix &rhs);
+
+    Matrix &operator*=(double scalar);
+
+    friend Matrix operator*(Matrix lhs, const Matrix &rhs);
+
+    friend Matrix operator*(Matrix lhs, double scalar);
+
+    friend Matrix operator*(double scalar, Matrix rhs);
+
+
+
+
 };
 
 #endif //NNPLUSPLUS_MATRIX_HPP
