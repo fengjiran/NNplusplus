@@ -15,7 +15,6 @@
 
 #include "matrix_exceptions.hpp"
 
-
 class Matrix {
 private:
     size_t m_size_;  // typedef unsigned long long int size_t, (M)xN

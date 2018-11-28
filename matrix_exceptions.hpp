@@ -5,7 +5,7 @@
 #ifndef NNPLUSPLUS_MATRIX_EXCEPTIONS_HPP
 #define NNPLUSPLUS_MATRIX_EXCEPTIONS_HPP
 
-#include <bits/exception.h>
+#include <exception>
 
 class MatrixDimensionsMismatch : public std::exception {
     const char *what() const noexcept override {
