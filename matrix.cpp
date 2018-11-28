@@ -26,4 +26,11 @@ Matrix::Matrix(const Matrix &rhs)
         row_ptrs_[i] = &matrix_[i * n_size_];
 }
 
-Matrix Matrix::dot(const Matrix &rhs) const {}
+
+Matrix &Matrix::operator=(const Matrix &rhs) {
+    if (this != &rhs) {
+        Matrix copy{rhs};
+        std::swap(*this, copy);
+    }
+    return *this;
+}
