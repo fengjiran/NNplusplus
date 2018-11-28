@@ -29,7 +29,7 @@ public:
 
     // Basic ctor to initialize a matrix of size m by n.
     // All matrix positions will be initialized to 0.
-    Matrix(size_t m = 0, size_t n = 0);
+    explicit Matrix(size_t m = 0, size_t n = 0);
 
     // copy ctor
     Matrix(const Matrix &rhs);
