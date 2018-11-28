@@ -41,6 +41,19 @@ public:
     // move ctor
     Matrix(Matrix &&rhs);
 
+    // move assignment operator
+    Matrix&operator=(Matrix&& rhs);
+
+    // dealloc matrix_ (ctor)
+    ~Matrix();
+
+    /**********************************************************
+     * Operator Overloads
+     **********************************************************/
+
+    // a substitute to operator[] for a 2D array
+    double&operator()(size_t row, size_t col);
+    const double&operator()(size_t row, size_t col) const;
 };
 
 #endif //NNPLUSPLUS_MATRIX_HPP
