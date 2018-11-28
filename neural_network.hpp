@@ -27,6 +27,19 @@ private:
     // layers are required for training.
     // this is where they are stored.
 
+    // Initializes the weights (parameters) between the different layers
+    // Initial values are being drawn from a normal distribution centered
+    // at 0, with standard deviation of
+    // (number_of_inputs_to_nodes_in_next_layer)^(-0.5)
+    Matrix initializeMatrix(size_t m, size_t n) const;
+
+    // The activation function. Currently using Sigmoid function.
+    double activationFunction(double x) const;
+
+    // A utility function to get the current time in a string.
+    // Used to name neural nets when saved.
+    std::string getCurrTime() const;
+
 };
 
 #endif //NNPLUSPLUS_NEURAL_NETWORK_HPP
